@@ -26,10 +26,14 @@ body{
 .cell{
     height: 100%;
     width: 100%;
-    transition: box-shadow 0.15s ease-out;
+    transition: box-shadow 0.15s ease-out, background-color 0.15s;
 }
 
 .cell:hover{
     box-shadow: 0 0 10px grey;
     cursor: pointer;
+}
+
+div[cell-state="alive"]{
+    background-color: #8c038768;
 }
