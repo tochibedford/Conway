@@ -19,5 +19,5 @@ As seen in [this wikipedia article](https://en.wikipedia.org/wiki/Conway%27s_Gam
 ## Guide
 - For speed, Try reducing browser window size, so less grid cells are created
 - Grid is randomly generated, for now
-- Any cell can be switch on (brought to life) if it's dead, by clicking on it
-- Any cell can be switch off (killed) if it's alive, by clicking on it
+- Any cell can be switched on (brought to life) if it's dead, by clicking on it
+- Any cell can be switched off (killed) if it's alive, by clicking on it
