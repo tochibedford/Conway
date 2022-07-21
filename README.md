@@ -1,5 +1,5 @@
 # Conway
-## Implementing Conway's Game of Life using DOM elements
+## Implementing Conway's Game of Life using DOM elements, allowing for an interactive board 
 
 Can be found [here](https://tochi-conway.netlify.app/) 🫡 😁
 
@@ -22,3 +22,6 @@ As seen in [this wikipedia article](https://en.wikipedia.org/wiki/Conway%27s_Gam
 - Grid is randomly generated, for now
 - Any cell can be switched on (brought to life) if it's dead, by clicking on it
 - Any cell can be switched off (killed) if it's alive, by clicking on it
+
+## To be implemented:
+- A way for the user to create their own initial seed state.
