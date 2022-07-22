@@ -25,3 +25,4 @@ As seen in [this wikipedia article](https://en.wikipedia.org/wiki/Conway%27s_Gam
 
 ## To be implemented:
 - A way for the user to create their own initial seed state.
+- Pausing, Stopping, Resetting and Step through functionalities
