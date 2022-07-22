@@ -4,6 +4,28 @@
 */
 
 const app = document.querySelector(".app");
+const dragger = document.querySelector(".dragger");
+
+// controls widget dragger 
+let moving = false;
+const delta = 4;
+dragger.addEventListener('mousedown',(e)=>{
+    moving = true;
+});
+
+window.addEventListener('mousemove', (e)=>{
+    if(moving){
+        console.log("wow")
+        dragger.parentElement.style.left = `${e.clientX+60}px`;
+        dragger.parentElement.style.top = `${e.clientY-20}px`;
+    }
+})
+
+window.addEventListener('mouseup', (e)=>{
+    moving = false;
+
+})
+// actual board
 
 const cellSize = 30; // length of one side of a cell in pixels
 let gridWidth = Math.floor(app.offsetWidth/cellSize); // calculate number of cells in a row based on container width
@@ -292,7 +314,7 @@ class Board{
 setUpGrid();
 mainBoard = new Board(gridWidth, gridHeight);
 
-window.addEventListener('click', (e)=>{
+window.addEventListener('mousedown', (e)=>{
     if(e.target.classList.contains("cell")){
         mainBoard.setCellManually(e.target.getAttribute("cellnumber"));
     }

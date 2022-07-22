@@ -37,3 +37,67 @@ body{
 div[cell-state="alive"]{
     background-color: #8c038768;
 }
+
+.controlsWidget{
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    width: 120px;
+    height: 40px;
+    transform-origin: 50% 0px;
+    transform: translateX(-50%);
+    background-color: rgb(74, 92, 105);
+    opacity: 0.4;
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.controlsWidget:hover{
+    opacity: 1;
+}
+
+.dragger{
+    width: 40px;
+    height: 100%;
+    background-color: rgb(55, 36, 78);
+    cursor: grab;
+    user-select: none;
+}
+
+.dragger:active{
+    cursor: grabbing;
+}
+
+.draggerImage{
+    object-fit: cover;
+    width: 40px;
+    height: 100%;
+    filter: invert();
+    mix-blend-mode: screen;
+}
+
+.controls{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controlContainer{
+    width: 40px;
+    height: 100%;
+}
+
+.control{
+    height: 100%;
+    width: 40px;
+    cursor: pointer;
+}
+
+.pauseControl{
+    font-weight: 800;
+    font-size: 1.2rem;
+}
