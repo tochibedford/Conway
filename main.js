@@ -3,10 +3,22 @@
     Title = Conway's Game of Life implementation with DOM elements
 */
 
+let animatorFunction = ()=>{
+    // every 100 milliseconds this recaulculates the cells of the board and redraws the DOM 
+    // for use with a setInterval
+    mainBoard.boardSlider();
+    mainBoard.calculateNextGeneration();
+    affectDom(app, mainBoard.board);
+}
+
 const app = document.querySelector(".app");
 const dragger = document.querySelector(".dragger");
+const pauseButton = document.querySelector('.pauseContainer');
+const playButton = document.querySelector('.playControl');
+const forwardButton = document.querySelector('.forwardControl');
+const playAndForwardButtons = document.querySelector(".playForwardContainer");
 
-// controls widget dragger 
+// controls widget 
 let moving = false;
 const delta = 4;
 dragger.addEventListener('mousedown',(e)=>{
@@ -15,9 +27,8 @@ dragger.addEventListener('mousedown',(e)=>{
 
 window.addEventListener('mousemove', (e)=>{
     if(moving){
-        console.log("wow")
-        dragger.parentElement.style.left = `${e.clientX+60}px`;
-        dragger.parentElement.style.top = `${e.clientY-20}px`;
+        dragger.parentElement.style.left = `${Math.max(0+dragger.parentElement.offsetWidth/2, Math.min(window.innerWidth-dragger.offsetWidth-20, e.clientX+dragger.parentElement.offsetWidth/2))}px`;
+        dragger.parentElement.style.top = `${Math.max(0, Math.min(window.innerHeight-40, e.clientY-20))}px`;
     }
 })
 
@@ -25,14 +36,43 @@ window.addEventListener('mouseup', (e)=>{
     moving = false;
 
 })
+
+pauseButton.addEventListener('click', ()=>{
+    clearInterval(interval);
+    pauseButton.classList.add("flyDown");
+    playAndForwardButtons.hidden = false;
+    playAndForwardButtons.classList.add("flyUp");
+    setTimeout(()=>{
+        pauseButton.style.display = "none";
+        playAndForwardButtons.style.display = "flex"
+    }, 500);
+})
+
+playButton.addEventListener('click', ()=>{
+    interval = setInterval(animatorFunction, 100)
+    pauseButton.classList.remove("flyDown");
+    pauseButton.classList.add("flyUp");
+    playAndForwardButtons.classList.remove("flyUp");
+    playAndForwardButtons.classList.add("flyDown");
+    setTimeout(()=>{
+        pauseButton.style.display = "flex";
+        playAndForwardButtons.style.display = "none"
+    }, 400);
+})
+
+forwardButton.addEventListener('click', ()=>{
+    mainBoard.boardSlider();
+    mainBoard.calculateNextGeneration();
+    affectDom(app, mainBoard.board);
+})
+
 // actual board
+let interval;
+let mainBoard;
 
 const cellSize = 30; // length of one side of a cell in pixels
 let gridWidth = Math.floor(app.offsetWidth/cellSize); // calculate number of cells in a row based on container width
 let gridHeight = Math.floor(app.offsetHeight/cellSize); // calculate number of rows based on container height
-
-let interval;
-let mainBoard;
 
 window.addEventListener('resize', ()=>{
     // clears all cells from DOM then repopulates DOM with correct number of cells
@@ -44,11 +84,7 @@ window.addEventListener('resize', ()=>{
     setUpGrid();
     mainBoard = new Board(gridWidth, gridHeight);
 
-    interval = setInterval(()=>{
-        affectDom(app, mainBoard.board);
-        mainBoard.boardSlider();
-        mainBoard.calculateNextGeneration();
-    },100)
+    interval = setInterval(animatorFunction, 100)
 })
 
 const affectDom = (gridContainer, board)=>{
@@ -317,11 +353,7 @@ mainBoard = new Board(gridWidth, gridHeight);
 window.addEventListener('mousedown', (e)=>{
     if(e.target.classList.contains("cell")){
         mainBoard.setCellManually(e.target.getAttribute("cellnumber"));
+        affectDom(app, mainBoard.board);
     }
 })
-interval = setInterval(()=>{
-    // every 100 milliseconds this recaulculates the cells of the board and redraws the DOM 
-    affectDom(app, mainBoard.board);
-    mainBoard.boardSlider();
-    mainBoard.calculateNextGeneration();
-},100)
+interval = setInterval(animatorFunction,100)

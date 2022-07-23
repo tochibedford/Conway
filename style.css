@@ -38,11 +38,40 @@ div[cell-state="alive"]{
     background-color: #8c038768;
 }
 
+@keyframes flyDown {
+    from{
+        transform: none;
+    }
+    to{
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes flyUp {
+    from{
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to{
+        transform: none;
+        opacity: 1;
+    }
+}
+
+.flyDown{
+    animation: flyDown 0.5s ease-in-out;
+}
+
+.flyUp{
+    animation: flyUp 0.5s ease-in-out;
+}
+
 .controlsWidget{
     position: fixed;
     bottom: 30px;
     left: 50%;
-    width: 120px;
+    width: max-content;
     height: 40px;
     transform-origin: 50% 0px;
     transform: translateX(-50%);
@@ -51,7 +80,7 @@ div[cell-state="alive"]{
     display: flex;
     border-radius: 10px;
     overflow: hidden;
-    transition: all 0.3s;
+    transition: all 0.2s;
 }
 
 .controlsWidget:hover{
@@ -79,25 +108,61 @@ div[cell-state="alive"]{
 }
 
 .controls{
-    width: 100%;
+    width: max-content;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 1rem;
+}
+
+.controlContainer{
+    width: 40px;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.controlContainer{
-    width: 40px;
-    height: 100%;
-}
-
 .control{
     height: 100%;
     width: 40px;
     cursor: pointer;
+    margin: 0 0.2em;
 }
 
 .pauseControl{
     font-weight: 800;
     font-size: 1.2rem;
+}
+
+.playForwardContainer{
+    display: none;
+    width: max-content;
+}
+
+.triangleIcon{
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top: 0;
+    border-bottom: 40px solid #ffffffeb;
+    transform: rotate(90deg) scale(0.6);
+}
+
+.playControl{
+    border: 1px #8EC5FC solid;
+    background: #270f41;
+}
+
+.ffTriangle2{
+    transform: translateX(-70%) rotate(90deg) scale(0.6);
+    border-bottom: 40px solid #ffffff;
+}
+
+.forwardControl{
+    display: flex;
+    border: 1px #8EC5FC solid;
+    width: 50px;
+    background: #270f41;
 }
