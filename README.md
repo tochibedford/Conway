@@ -1,7 +1,7 @@
 # Conway
 ## Implementing Conway's Game of Life using DOM elements, allowing for an interactive board 
 
-Can be found [here](https://tochi-conway.netlify.app/) 🫡 😁
+Can be found deployed [here](https://tochi-conway.netlify.app/) 🫡 😁
 
 As seen in [this wikipedia article](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life):
 
