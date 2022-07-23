@@ -18,11 +18,10 @@ As seen in [this wikipedia article](https://en.wikipedia.org/wiki/Conway%27s_Gam
 > All other live cells die in the next generation. Similarly, all other dead cells stay dead.
 
 ## Guide
-- For speed, Try reducing browser window size, so less grid cells are created
+- To improve performance, Try reducing browser window size, so less grid cells are created
 - Grid is randomly generated, for now
 - Any cell can be switched on (brought to life) if it's dead, by clicking on it
 - Any cell can be switched off (killed) if it's alive, by clicking on it
 
 ## To be implemented:
 - A way for the user to create their own initial seed state.
-- Pausing, Stopping, Resetting and Step through functionalities
