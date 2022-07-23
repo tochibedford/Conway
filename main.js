@@ -11,6 +11,7 @@ let animatorFunction = ()=>{
     affectDom(app, mainBoard.board);
 }
 
+let playing = true;
 const app = document.querySelector(".app");
 const dragger = document.querySelector(".dragger");
 const pauseButton = document.querySelector('.pauseContainer');
@@ -37,8 +38,9 @@ window.addEventListener('mouseup', (e)=>{
 
 })
 
-pauseButton.addEventListener('click', ()=>{
+const pauseFunction = ()=>{
     clearInterval(interval);
+    playing = false;
     pauseButton.classList.add("flyDown");
     playAndForwardButtons.hidden = false;
     playAndForwardButtons.classList.add("flyUp");
@@ -46,10 +48,11 @@ pauseButton.addEventListener('click', ()=>{
         pauseButton.style.display = "none";
         playAndForwardButtons.style.display = "flex"
     }, 500);
-})
+}
 
-playButton.addEventListener('click', ()=>{
-    interval = setInterval(animatorFunction, 100)
+const playFunction = ()=>{
+    interval = setInterval(animatorFunction, 100);
+    playing = true;
     pauseButton.classList.remove("flyDown");
     pauseButton.classList.add("flyUp");
     playAndForwardButtons.classList.remove("flyUp");
@@ -58,13 +61,19 @@ playButton.addEventListener('click', ()=>{
         pauseButton.style.display = "flex";
         playAndForwardButtons.style.display = "none"
     }, 400);
-})
+}
 
-forwardButton.addEventListener('click', ()=>{
+const forwardFunction = ()=>{
     mainBoard.boardSlider();
     mainBoard.calculateNextGeneration();
     affectDom(app, mainBoard.board);
-})
+}
+
+pauseButton.addEventListener('click', pauseFunction)
+
+playButton.addEventListener('click', playFunction)
+
+forwardButton.addEventListener('click', forwardFunction)
 
 // actual board
 let interval;
@@ -84,7 +93,10 @@ window.addEventListener('resize', ()=>{
     setUpGrid();
     mainBoard = new Board(gridWidth, gridHeight);
 
-    interval = setInterval(animatorFunction, 100)
+    playFunction();
+
+ 
+    
 })
 
 const affectDom = (gridContainer, board)=>{
